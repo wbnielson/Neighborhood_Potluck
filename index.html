@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -85,7 +84,400 @@
 
     .detail-item {
       display: flex;
-      align-
+      align-items: center;
+      gap: 8px;
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
 
+    .card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 25px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      margin-bottom: 25px;
+      border: 2px solid var(--border-color);
+    }
+
+    h2 {
+      font-family: 'Fredoka One', cursive;
+      color: var(--primary-orange);
+      font-size: 1.6rem;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: var(--deep-brown);
+      font-size: 0.95rem;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+      width: 100%;
+      padding: 12px 15px;
+      border: 2px solid #ffe0b2;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    input[type="text"]:focus,
+    input[type="number"]:focus,
+    select:focus {
+      border-color: var(--primary-orange);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    @media (max-width: 600px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #fff3e0;
+      padding: 12px 15px;
+      border-radius: 10px;
+      border: 1px solid #ffe0b2;
+      cursor: pointer;
+    }
+
+    .checkbox-group input {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--primary-orange);
+      cursor: pointer;
+    }
+
+    .checkbox-group label {
+      margin-bottom: 0;
+      cursor: pointer;
+    }
+
+    button.btn-submit {
+      width: 100%;
+      background: linear-gradient(135deg, #e65100, #f57c00);
+      color: white;
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.2rem;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(230, 81, 0, 0.3);
+      transition: transform 0.1s, box-shadow 0.1s;
+    }
+
+    button.btn-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(230, 81, 0, 0.4);
+    }
+
+    button.btn-submit:active {
+      transform: translateY(0);
+    }
+
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .stat-card {
+      background: white;
+      padding: 15px;
+      border-radius: 12px;
+      text-align: center;
+      border: 2px solid var(--border-color);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+
+    .stat-number {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.8rem;
+      color: var(--primary-orange);
+    }
+
+    .stat-label {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--deep-brown);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .list-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .signup-item {
+      background: #fafafa;
+      border-left: 5px solid var(--primary-orange);
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+    }
+
+    .item-main {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--deep-brown);
+    }
+
+    .item-sub {
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    .badge {
+      background: #ffe0b2;
+      color: #e65100;
+      font-weight: 700;
+      font-size: 0.8rem;
+      padding: 4px 10px;
+      border-radius: 12px;
+    }
+
+    .btn-delete {
+      background: none;
+      border: none;
+      color: #d32f2f;
+      cursor: pointer;
+      font-size: 1.1rem;
+      padding: 4px 8px;
+      border-radius: 4px;
+      margin-left: 10px;
+    }
+
+    .btn-delete:hover {
+      background: #ffebee;
+    }
+
+    .empty-state {
+      text-align: center;
+      color: #888;
+      padding: 20px;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <!-- HEADER -->
+    <header>
+      <svg class="header-svg" viewBox="0 0 100 100">
+        <path d="M50 15 C30 15 15 30 15 55 C15 80 30 90 50 90 C70 90 85 80 85 55 C85 30 70 15 50 15 Z" fill="#ff6f00"/>
+        <path d="M48 5 L52 5 L55 20 L45 20 Z" fill="#3e2723"/>
+        <polygon points="32,42 42,48 35,52" fill="#fff8e1"/>
+        <polygon points="68,42 58,48 65,52" fill="#fff8e1"/>
+        <polygon points="50,55 45,62 55,62" fill="#fff8e1"/>
+        <path d="M30 72 Q50 82 70 72 Q50 78 30 72 Z" fill="#fff8e1"/>
+      </svg>
+      <h1>Neighborhood Potluck & Pumpkin Carving</h1>
+      <div class="subtitle">Come Out & Get To Know Your Neighbors!</div>
+      
+      <div class="event-details">
+        <div class="detail-item">📅 Friday, October 30th @ 5:30 PM</div>
+        <div class="detail-item">📍 Driveway: 11449 S Bingham Rim Rd, South Jordan, UT 84009</div>
+        <div class="detail-item">🌭 Main Dish Provided: Chili Dogs</div>
+      </div>
+    </header>
+
+    <!-- STATS BAR -->
+    <div class="stats-bar">
+      <div class="stat-card">
+        <div class="stat-number" id="stat-attending">0</div>
+        <div class="stat-label">Attending</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" id="stat-dishes">0</div>
+        <div class="stat-label">Side Dishes</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" id="stat-carvers">0</div>
+        <div class="stat-label">Carvers</div>
+      </div>
+    </div>
+
+    <!-- SIGNUP FORM CARD -->
+    <div class="card">
+      <h2>🎃 Side Dish & RSVP Signup</h2>
+      <p style="margin-bottom: 20px; color: #555;">We are providing the chili dogs! Please sign up to bring a side dish to share with everyone. Pumpkin carving is optional but highly encouraged!</p>
+
+      <form id="signup-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Your Name *</label>
+            <input type="text" id="name" required placeholder="e.g. The Smith Family / John">
+          </div>
+          <div class="form-group">
+            <label for="guests">Number of Guests *</label>
+            <input type="number" id="guests" min="1" value="1" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="category">Side Dish Category *</label>
+          <select id="category" required>
+            <option value="">-- Select Side Dish Category --</option>
+            <option value="Salad / Veggies">Salad / Veggies</option>
+            <option value="Chips & Dip">Chips & Dip</option>
+            <option value="Hot Side (Beans, Mac & Cheese, etc.)">Hot Side (Beans, Mac & Cheese, etc.)</option>
+            <option value="Dessert">Dessert</option>
+            <option value="Drinks / Cider">Drinks / Cider</option>
+            <option value="Chili Dog Toppings">Chili Dog Toppings (Cheese, Onions, Relish)</option>
+            <option value="Other Side">Other Side</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="item">Specific Item You Are Bringing *</label>
+          <input type="text" id="item" required placeholder="e.g. Potato Salad, Apple Cider, Brownies">
+        </div>
+
+        <div class="form-group">
+          <div class="checkbox-group">
+            <input type="checkbox" id="carving">
+            <label for="carving">🎃 We plan to bring pumpkins to carve! (Optional)</label>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-submit">Complete Signup</button>
+      </form>
+    </div>
+
+    <!-- SIGNUPS LIST CARD -->
+    <div class="card">
+      <div class="list-header">
+        <h2>🥗 Who's Bringing What</h2>
+      </div>
+
+      <div id="signups-list">
+        <!-- Dynamic Signups injected here -->
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    let signups = JSON.parse(localStorage.getItem('neighborhood_potluck_signups')) || [];
+
+    const signupForm = document.getElementById('signup-form');
+    const signupsList = document.getElementById('signups-list');
+    const statAttending = document.getElementById('stat-attending');
+    const statDishes = document.getElementById('stat-dishes');
+    const statCarvers = document.getElementById('stat-carvers');
+
+    function saveAndRender() {
+      localStorage.setItem('neighborhood_potluck_signups', JSON.stringify(signups));
+      renderList();
+      renderStats();
+    }
+
+    function renderStats() {
+      const totalAttending = signups.reduce((sum, s) => sum + Number(s.guests), 0);
+      const totalDishes = signups.length;
+      const totalCarvers = signups.filter(s => s.carving).length;
+
+      statAttending.textContent = totalAttending;
+      statDishes.textContent = totalDishes;
+      statCarvers.textContent = totalCarvers;
+    }
+
+    function renderList() {
+      signupsList.innerHTML = '';
+
+      if (signups.length === 0) {
+        signupsList.innerHTML = '<div class="empty-state">No signups yet! Be the first neighbor to sign up above.</div>';
+        return;
+      }
+
+      signups.forEach((s, index) => {
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'signup-item';
+
+        itemDiv.innerHTML = `
+          <div>
+            <div class="item-main">${escapeHtml(s.item)}</div>
+            <div class="item-sub">Brought by <strong>${escapeHtml(s.name)}</strong> (${s.guests} guest${s.guests > 1 ? 's' : ''}) ${s.carving ? '• 🎃 Carving Pumpkins' : ''}</div>
+          </div>
+          <div style="display: flex; align-items: center;">
+            <span class="badge">${escapeHtml(s.category)}</span>
+            <button class="btn-delete" onclick="deleteSignup(${index})" title="Remove Signup">✕</button>
+          </div>
+        `;
+
+        signupsList.appendChild(itemDiv);
+      });
+    }
+
+    function deleteSignup(index) {
+      if (confirm("Are you sure you want to remove this signup?")) {
+        signups.splice(index, 1);
+        saveAndRender();
+      }
+    }
+
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    signupForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const newSignup = {
+        name: document.getElementById('name').value.trim(),
+        guests: parseInt(document.getElementById('guests').value, 10),
+        category: document.getElementById('category').value,
+        item: document.getElementById('item').value.trim(),
+        carving: document.getElementById('carving').checked,
+        timestamp: new Date().toISOString()
+      };
+
+      signups.push(newSignup);
+      saveAndRender();
+
+      signupForm.reset();
+      alert("Thanks for signing up! We look forward to seeing you!");
+    });
+
+    // Initial render
+    renderList();
+    renderStats();
+  </script>
 </body>
 </html>
+
