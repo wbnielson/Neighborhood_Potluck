@@ -1,796 +1,91 @@
+
 <!DOCTYPE html>
-<html lang="en" class="h-full bg-amber-50/40">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Neighborhood Potluck & Pumpkin Carving Signup</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,800;1,600;1,800&display=swap" rel="stylesheet">
-    <!-- QR Code Library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            50: '#fff7ed',
-                            100: '#ffedd5',
-                            200: '#fed7aa',
-                            300: '#fdba74',
-                            400: '#fb923c',
-                            500: '#f97316',
-                            600: '#ea580c',
-                            700: '#c2410c',
-                            800: '#9a3412',
-                            900: '#7c2d12',
-                        },
-                        autumn: {
-                            gold: '#d97706',
-                            leaf: '#b45309',
-                            rust: '#991b1b',
-                            bark: '#3f1708',
-                            night: '#260a02',
-                            pumpkin: '#ea580c',
-                            glow: '#fef08a'
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-                        serif: ['"Playfair Display"', 'serif'],
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        @media print {
-            body {
-                background: white !important;
-                color: black !important;
-            }
-            .no-print {
-                display: none !important;
-            }
-            .print-only {
-                display: block !important;
-            }
-            .print-card {
-                box-shadow: none !important;
-                border: 3px solid #ea580c !important;
-                page-break-inside: avoid;
-            }
-            .print-bg {
-                background-color: #fffaf5 !important;
-            }
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neighborhood Potluck & Pumpkin Carving Signup</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-orange: #e65100;
+      --secondary-orange: #f57c00;
+      --accent-yellow: #ffb300;
+      --deep-brown: #3e2723;
+      --warm-bg: #fff8e1;
+      --card-bg: #ffffff;
+      --text-color: #2c1810;
+      --border-color: #ffe0b2;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background-color: var(--warm-bg);
+      color: var(--text-color);
+      line-height: 1.6;
+      padding: 20px 10px;
+      background-image: radial-gradient(#ffe0b2 1px, transparent 1px);
+      background-size: 20px 20px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      background: linear-gradient(135deg, #d84315, #e65100, #f57c00);
+      color: white;
+      padding: 30px 20px;
+      border-radius: 20px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+      margin-bottom: 25px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header-svg {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      font-family: 'Fredoka One', cursive;
+      font-size: 2.3rem;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      letter-spacing: 0.5px;
+    }
+
+    .subtitle {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #ffe0b2;
+      margin-bottom: 15px;
+    }
+
+    .event-details {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 15px;
+      background: rgba(0,0,0,0.15);
+      padding: 15px;
+      border-radius: 12px;
+    }
+
+    .detail-item {
+      display: flex;
+      align-
 
-        /* Floating Leaves Animation */
-        .leaf-particle {
-            position: absolute;
-            pointer-events: none;
-            z-index: 1;
-            animation: fall linear infinite;
-            opacity: 0.6;
-        }
-
-        @keyframes fall {
-            0% {
-                transform: translateY(-20px) rotate(0deg) translateX(0px);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.7;
-            }
-            90% {
-                opacity: 0.7;
-            }
-            100% {
-                transform: translateY(105vh) rotate(360deg) translateX(50px);
-                opacity: 0;
-            }
-        }
-
-        .jack-glow {
-            filter: drop-shadow(0 0 12px rgba(251, 191, 36, 0.75));
-        }
-
-        .bg-autumn-pattern {
-            background-color: #260a02;
-            background-image: radial-gradient(#ea580c 0.75px, transparent 0.75px), radial-gradient(#ea580c 0.75px, #260a02 0.75px);
-            background-size: 30px 30px;
-            background-position: 0 0, 15px 15px;
-        }
-    </style>
-</head>
-<body class="h-full text-stone-800 font-sans antialiased bg-stone-100 selection:bg-brand-500 selection:text-white flex flex-col relative overflow-x-hidden">
-
-    <!-- Ambient Floating Fall Leaves -->
-    <div id="leaves-container" class="fixed inset-0 pointer-events-none overflow-hidden no-print z-0"></div>
-
-    <!-- Top Navigation Bar -->
-    <header class="bg-gradient-to-r from-autumn-night via-autumn-bark to-autumn-rust text-amber-50 shadow-lg no-print sticky top-0 z-50 border-b border-amber-600/30">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-            <div class="flex items-center space-x-3">
-                <!-- Carved Pumpkin Icon Header -->
-                <div class="relative group cursor-pointer">
-                    <svg class="w-9 h-9 text-brand-500 jack-glow transition transform group-hover:scale-110" viewBox="0 0 100 100" fill="currentColor">
-                        <!-- Pumpkin Body -->
-                        <path d="M50 15 C25 15 10 35 10 60 C10 85 28 95 50 95 C72 95 90 85 90 60 C90 35 75 15 50 15 Z" fill="#ea580c" />
-                        <path d="M50 15 C35 15 25 35 25 60 C25 85 35 95 50 95 C65 95 75 85 75 60 C75 35 65 15 50 15 Z" fill="#f97316" />
-                        <!-- Stem -->
-                        <path d="M46 5 C46 5 48 15 50 15 C52 15 54 5 54 5 C54 5 50 2 46 5 Z" fill="#3f6212" />
-                        <path d="M50 15 C48 15 45 8 40 5 C45 8 48 12 50 15 Z" fill="#65a30d" />
-                        <!-- Carved Eyes -->
-                        <polygon points="30,42 42,42 36,30" fill="#fef08a" class="animate-pulse" />
-                        <polygon points="58,42 70,42 64,30" fill="#fef08a" class="animate-pulse" />
-                        <!-- Carved Nose -->
-                        <polygon points="50,48 45,56 55,56" fill="#fef08a" />
-                        <!-- Carved Mouth with Teeth -->
-                        <path d="M28 68 Q50 88 72 68 Q65 82 50 82 Q35 82 28 68 Z" fill="#fef08a" />
-                        <rect x="38" y="70" width="5" height="5" fill="#f97316" />
-                        <rect x="57" y="70" width="5" height="5" fill="#f97316" />
-                        <rect x="48" y="76" width="5" height="5" fill="#f97316" />
-                    </svg>
-                </div>
-                <div>
-                    <h1 class="font-serif text-lg font-extrabold tracking-wide text-amber-100 flex items-center gap-2">
-                        <span>Neighborhood Potluck & Pumpkin Carving</span>
-                    </h1>
-                    <p class="text-xs text-amber-200/80 hidden sm:block">🍁 Come Out & Get To Know Your Neighbors!</p>
-                </div>
-            </div>
-
-            <!-- View Switcher Tabs -->
-            <div class="flex items-center space-x-1 bg-black/40 p-1.5 rounded-2xl border border-amber-500/30">
-                <button id="tab-signup" onclick="switchTab('signup')" class="px-3.5 py-1.5 text-xs sm:text-sm font-bold rounded-xl transition-all duration-200 bg-brand-600 text-white shadow-md">
-                    Sign Up & Dishes
-                </button>
-                <button id="tab-flyer" onclick="switchTab('flyer')" class="px-3.5 py-1.5 text-xs sm:text-sm font-bold rounded-xl transition-all duration-200 text-amber-200 hover:text-white hover:bg-white/10">
-                    Printable Flyer & QR
-                </button>
-            </div>
-        </div>
-    </header>
-
-    <!-- Main Content Container -->
-    <main class="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 z-10">
-
-        <!-- SIGNUP FORM & LIST VIEW -->
-        <div id="view-signup" class="space-y-8">
-            
-            <!-- Hero Event Banner with Rich Fall Styling & Carved Pumpkins -->
-            <div class="relative overflow-hidden rounded-3xl bg-autumn-pattern text-white shadow-2xl border-2 border-amber-600/40">
-                
-                <!-- Decorative Top Fall Leaves Garland -->
-                <div class="absolute top-0 inset-x-0 h-3 bg-gradient-to-r from-amber-500 via-orange-600 to-red-700"></div>
-
-                <div class="relative p-6 sm:p-10 z-10 flex flex-col md:flex-row items-center justify-between gap-8">
-                    
-                    <!-- Text Content -->
-                    <div class="space-y-4 max-w-2xl">
-                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/20 border border-amber-400/40 text-amber-200 text-xs font-bold uppercase tracking-wider">
-                            <span>🍂 Fall Neighborhood Gathering</span>
-                        </div>
-                        <h2 class="font-serif text-3xl sm:text-5xl font-extrabold text-amber-100 tracking-tight leading-tight">
-                            Come Out & Get To Know Your Neighbors!
-                        </h2>
-                        <p class="text-amber-100/90 text-sm sm:text-base leading-relaxed">
-                            Join us in our driveway for a cozy autumn evening! We're grilling up <strong>hot chili dogs</strong> for everyone. Please bring a favorite <strong>side dish, salad, snack, or dessert</strong> to share. Feel free to bring pumpkins and carving tools to carve outside with neighbors!
-                        </p>
-                        
-                        <!-- Event Details Pills -->
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 text-xs">
-                            <div class="bg-black/40 backdrop-blur-md p-3 rounded-2xl border border-amber-500/30 flex items-center space-x-3">
-                                <div class="p-2 bg-brand-600/40 rounded-xl text-amber-300 shrink-0">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                                </div>
-                                <div>
-                                    <p class="text-[10px] text-amber-300 font-bold uppercase tracking-wider">Where</p>
-                                    <p class="font-bold text-white text-xs">11449 S Bingham Rim Rd (Driveway)</p>
-                                </div>
-                            </div>
-                            <div class="bg-black/40 backdrop-blur-md p-3 rounded-2xl border border-amber-500/30 flex items-center space-x-3">
-                                <div class="p-2 bg-brand-600/40 rounded-xl text-amber-300 shrink-0">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                                </div>
-                                <div>
-                                    <p class="text-[10px] text-amber-300 font-bold uppercase tracking-wider">When</p>
-                                    <p class="font-bold text-white text-xs">Friday, Oct 30 • 5:30 PM</p>
-                                </div>
-                            </div>
-                            <div class="bg-black/40 backdrop-blur-md p-3 rounded-2xl border border-amber-500/30 flex items-center space-x-3">
-                                <div class="p-2 bg-brand-600/40 rounded-xl text-amber-300 shrink-0">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
-                                </div>
-                                <div>
-                                    <p class="text-[10px] text-amber-300 font-bold uppercase tracking-wider">Food & Fun</p>
-                                    <p class="font-bold text-white text-xs">Chili Dogs Provided • Carving Optional</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Glowing Carved Pumpkin Art Illustration -->
-                    <div class="shrink-0 flex flex-col items-center justify-center p-4 bg-black/30 rounded-3xl border border-amber-500/30">
-                        <svg class="w-36 h-36 sm:w-44 sm:h-44 jack-glow" viewBox="0 0 100 100" fill="currentColor">
-                            <path d="M50 15 C20 15 5 35 5 62 C5 88 25 98 50 98 C75 98 95 88 95 62 C95 35 80 15 50 15 Z" fill="#ea580c" />
-                            <path d="M50 15 C32 15 20 35 20 62 C20 88 32 98 50 98 C68 98 80 88 80 62 C80 35 68 15 50 15 Z" fill="#f97316" />
-                            <path d="M50 15 C40 15 35 35 35 62 C35 88 40 98 50 98 C60 98 65 88 65 62 C65 35 60 15 50 15 Z" fill="#fb923c" />
-                            <path d="M46 5 C46 5 48 15 50 15 C52 15 54 5 54 5 C54 5 50 2 46 5 Z" fill="#3f6212" />
-                            <!-- Jack-o'-Lantern Face -->
-                            <polygon points="26,45 40,45 33,32" fill="#fef08a" />
-                            <polygon points="60,45 74,45 67,32" fill="#fef08a" />
-                            <polygon points="50,50 44,60 56,60" fill="#fef08a" />
-                            <path d="M22 70 Q50 92 78 70 Q68 85 50 85 Q32 85 22 70 Z" fill="#fef08a" />
-                            <rect x="35" y="73" width="6" height="6" fill="#ea580c" />
-                            <rect x="59" y="73" width="6" height="6" fill="#ea580c" />
-                            <rect x="47" y="78" width="6" height="6" fill="#ea580c" />
-                        </svg>
-                        <span class="text-xs font-serif italic text-amber-200 mt-2">Bring a pumpkin to carve!</span>
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-                
-                <!-- Signup Form Column -->
-                <div class="lg:col-span-5">
-                    <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-xl border-2 border-amber-200 sticky top-24">
-                        <div class="border-b border-amber-100 pb-4 mb-6 flex items-center justify-between">
-                            <div>
-                                <h3 class="font-serif text-2xl font-bold text-autumn-bark">Side Dish Signup</h3>
-                                <p class="text-stone-500 text-xs mt-1">Let neighbors know what you'll bring!</p>
-                            </div>
-                            <span class="text-2xl">🥗</span>
-                        </div>
-
-                        <!-- Notification Container -->
-                        <div id="form-alert" class="hidden mb-6 p-4 rounded-2xl text-xs font-semibold transition-all duration-300"></div>
-
-                        <form id="signup-form" onsubmit="handleSignupSubmit(event)" class="space-y-4">
-                            <div>
-                                <label for="fullname" class="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-1.5">Full Name / Family Name *</label>
-                                <input type="text" id="fullname" required placeholder="e.g., The Miller Family" 
-                                    class="w-full px-4 py-3 rounded-xl border border-stone-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 text-stone-800 text-sm outline-none transition">
-                            </div>
-
-                            <div>
-                                <label for="contact" class="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-1.5">Phone or Email (Optional)</label>
-                                <input type="text" id="contact" placeholder="For reminders (optional)" 
-                                    class="w-full px-4 py-3 rounded-xl border border-stone-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 text-stone-800 text-sm outline-none transition">
-                            </div>
-
-                            <div class="grid grid-cols-2 gap-3">
-                                <div>
-                                    <label for="guests" class="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-1.5">Total Guests *</label>
-                                    <input type="number" id="guests" min="1" max="25" value="2" required 
-                                        class="w-full px-4 py-3 rounded-xl border border-stone-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 text-stone-800 text-sm outline-none transition">
-                                </div>
-                                <div>
-                                    <label for="carving" class="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-1.5">Carving Pumpkin? *</label>
-                                    <select id="carving" class="w-full px-3 py-3 rounded-xl border border-stone-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 text-stone-800 text-xs font-medium outline-none bg-white">
-                                        <option value="Yes">🎃 Yes! Bringing Pumpkin</option>
-                                        <option value="No">🥤 No, just food & social</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div>
-                                <label for="category" class="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-1.5">Side Dish Category *</label>
-                                <select id="category" required onchange="handleCategoryChange()" 
-                                    class="w-full px-4 py-3 rounded-xl border border-stone-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 text-stone-800 text-xs font-medium outline-none bg-white">
-                                    <option value="" disabled selected>Choose a category...</option>
-                                    <option value="Appetizers & Dips">Appetizers & Dips</option>
-                                    <option value="Side Dishes & Salads">Side Dishes & Salads</option>
-                                    <option value="Chili Dog Toppings">Chili Dog Toppings (Cheese, Onions, etc.)</option>
-                                    <option value="Desserts & Sweets">Desserts & Sweets</option>
-                                    <option value="Drinks & Apple Cider">Drinks & Apple Cider</option>
-                                    <option value="Chips & Snacks">Chips & Snacks</option>
-                                    <option value="Other Extra">Other Extra</option>
-                                </select>
-                            </div>
-
-                            <div>
-                                <label for="item-details" class="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-1.5">Specific Dish Name *</label>
-                                <input type="text" id="item-details" required placeholder="e.g., Creamy Potato Salad, Pumpkin Pie, Cider" 
-                                    class="w-full px-4 py-3 rounded-xl border border-stone-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 text-stone-800 text-sm outline-none transition">
-                            </div>
-
-                            <button type="submit" 
-                                class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-brand-600 to-autumn-rust hover:from-brand-700 hover:to-autumn-bark text-white font-bold text-sm shadow-lg hover:shadow-xl transition duration-200 transform active:scale-[0.98] flex items-center justify-center space-x-2">
-                                <span>Sign Up Side Dish</span>
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                            </button>
-                        </form>
-                    </div>
-                </div>
-
-                <!-- Current Signups List Column -->
-                <div class="lg:col-span-7 space-y-6">
-                    
-                    <!-- Dashboard Metrics -->
-                    <div class="grid grid-cols-3 gap-3">
-                        <div class="bg-gradient-to-br from-amber-50 to-orange-100/60 p-4 rounded-3xl border-2 border-amber-200/80 shadow-sm text-center">
-                            <p class="text-[10px] font-bold text-autumn-rust uppercase tracking-wider">Attending</p>
-                            <p id="stat-people" class="text-2xl sm:text-3xl font-extrabold text-autumn-bark mt-0.5">0</p>
-                            <p class="text-[10px] text-stone-500 font-medium">Neighbors</p>
-                        </div>
-                        <div class="bg-gradient-to-br from-amber-50 to-orange-100/60 p-4 rounded-3xl border-2 border-amber-200/80 shadow-sm text-center">
-                            <p class="text-[10px] font-bold text-autumn-rust uppercase tracking-wider">Side Dishes</p>
-                            <p id="stat-dishes" class="text-2xl sm:text-3xl font-extrabold text-brand-700 mt-0.5">0</p>
-                            <p class="text-[10px] text-stone-500 font-medium">Pledged</p>
-                        </div>
-                        <div class="bg-gradient-to-br from-amber-50 to-orange-100/60 p-4 rounded-3xl border-2 border-amber-200/80 shadow-sm text-center">
-                            <p class="text-[10px] font-bold text-autumn-rust uppercase tracking-wider">Pumpkin Carvers</p>
-                            <p id="stat-carving" class="text-2xl sm:text-3xl font-extrabold text-amber-600 mt-0.5">0</p>
-                            <p class="text-[10px] text-stone-500 font-medium">Families</p>
-                        </div>
-                    </div>
-
-                    <!-- Signups Directory -->
-                    <div class="bg-white rounded-3xl shadow-xl border-2 border-amber-200 overflow-hidden">
-                        <div class="p-6 bg-gradient-to-r from-amber-50 to-orange-50 border-b border-amber-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                            <div>
-                                <h3 class="font-serif text-xl font-bold text-autumn-bark">Community Side Dish Directory</h3>
-                                <p class="text-stone-500 text-xs mt-0.5">See what side dishes neighbors are bringing!</p>
-                            </div>
-                            
-                            <!-- Search & Filter -->
-                            <div>
-                                <select id="filter-category" onchange="renderSignups()" class="text-xs py-2 px-3 rounded-xl border border-amber-300 bg-white text-stone-700 font-semibold focus:outline-none focus:ring-2 focus:ring-brand-500 shadow-sm">
-                                    <option value="ALL"> All Categories</option>
-                                    <option value="Appetizers & Dips">Appetizers & Dips</option>
-                                    <option value="Side Dishes & Salads">Side Dishes & Salads</option>
-                                    <option value="Chili Dog Toppings">Chili Dog Toppings</option>
-                                    <option value="Desserts & Sweets">Desserts & Sweets</option>
-                                    <option value="Drinks & Apple Cider">Drinks & Apple Cider</option>
-                                    <option value="Chips & Snacks">Chips & Snacks</option>
-                                    <option value="Other Extra">Other Extra</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <!-- Signups List -->
-                        <div id="signups-container" class="divide-y divide-amber-100 max-h-[600px] overflow-y-auto">
-                            <!-- Dynamic Content Rendered Here -->
-                        </div>
-
-                        <div class="p-4 bg-amber-50/50 border-t border-amber-200 flex items-center justify-between text-xs text-stone-500">
-                            <span>Saved automatically to browser storage</span>
-                            <button onclick="clearAllData()" class="text-autumn-rust hover:text-red-800 font-bold underline">Reset Sample Data</button>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-        <!-- PRINTABLE FLYER & QR CODE VIEW -->
-        <div id="view-flyer" class="hidden space-y-6">
-            
-            <!-- Controls (Hidden on Print) -->
-            <div class="no-print bg-white p-5 rounded-3xl border-2 border-amber-200 shadow-lg flex flex-col sm:flex-row items-center justify-between gap-4">
-                <div>
-                    <h3 class="font-serif font-bold text-autumn-bark text-lg">Printable Neighborhood Flyer</h3>
-                    <p class="text-xs text-stone-500">Print or save this pumpkin-themed flyer with a dynamic QR code for neighbors.</p>
-                </div>
-                
-                <button onclick="window.print()" class="w-full sm:w-auto px-6 py-3 bg-brand-600 hover:bg-brand-700 text-white rounded-2xl text-sm font-bold shadow-md transition flex items-center justify-center space-x-2">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
-                    <span>Print Event Flyer</span>
-                </button>
-            </div>
-
-            <!-- Custom URL Setting (Hidden on Print) -->
-            <div class="no-print bg-amber-50 p-4 rounded-2xl border border-amber-300 flex flex-col sm:flex-row items-center gap-3">
-                <label for="qr-url-input" class="text-xs font-bold text-autumn-bark shrink-0">QR Link URL:</label>
-                <input type="text" id="qr-url-input" onchange="updateQRCode(this.value)" 
-                    class="w-full px-3 py-1.5 rounded-xl border border-amber-300 text-xs font-mono text-stone-800 bg-white focus:ring-2 focus:ring-brand-500 outline-none">
-                <button onclick="resetQRUrl()" class="text-xs text-brand-700 font-bold hover:underline shrink-0">Use Current Web Page</button>
-            </div>
-
-            <!-- PRINTABLE FLYER BOARD -->
-            <div class="max-w-2xl mx-auto bg-amber-50/40 p-8 sm:p-12 rounded-3xl shadow-2xl border-4 border-autumn-rust print-card relative overflow-hidden print-bg">
-                
-                <!-- Inner Border Frame -->
-                <div class="border-2 border-dashed border-amber-600/50 p-6 sm:p-8 rounded-2xl relative">
-                    
-                    <!-- Carved Pumpkin Header Visuals -->
-                    <div class="flex items-center justify-between mb-4">
-                        <!-- Left Pumpkin -->
-                        <svg class="w-16 h-16 text-brand-600 jack-glow" viewBox="0 0 100 100" fill="currentColor">
-                            <path d="M50 15 C20 15 5 35 5 62 C5 88 25 98 50 98 C75 98 95 88 95 62 C95 35 80 15 50 15 Z" fill="#ea580c" />
-                            <polygon points="26,45 40,45 33,32" fill="#fef08a" />
-                            <polygon points="60,45 74,45 67,32" fill="#fef08a" />
-                            <polygon points="50,50 44,60 56,60" fill="#fef08a" />
-                            <path d="M22 70 Q50 92 78 70 Q68 85 50 85 Q32 85 22 70 Z" fill="#fef08a" />
-                        </svg>
-
-                        <!-- Banner Badge -->
-                        <div class="bg-autumn-rust text-amber-50 text-xs sm:text-sm font-extrabold uppercase tracking-widest px-4 py-1.5 rounded-full shadow-sm text-center">
-                            🍂 Come Out & Get To Know Your Neighbors!
-                        </div>
-
-                        <!-- Right Pumpkin -->
-                        <svg class="w-16 h-16 text-brand-600 jack-glow" viewBox="0 0 100 100" fill="currentColor">
-                            <path d="M50 15 C20 15 5 35 5 62 C5 88 25 98 50 98 C75 98 95 88 95 62 C95 35 80 15 50 15 Z" fill="#ea580c" />
-                            <polygon points="26,45 40,45 33,32" fill="#fef08a" />
-                            <polygon points="60,45 74,45 67,32" fill="#fef08a" />
-                            <polygon points="50,50 44,60 56,60" fill="#fef08a" />
-                            <path d="M22 70 Q50 92 78 70 Q68 85 50 85 Q32 85 22 70 Z" fill="#fef08a" />
-                        </svg>
-                    </div>
-
-                    <!-- Main Title Section -->
-                    <div class="text-center space-y-2 mb-6">
-                        <h1 class="font-serif text-3xl sm:text-5xl font-extrabold text-autumn-bark tracking-tight">
-                            Neighborhood Potluck & Pumpkin Carving
-                        </h1>
-                        <p class="font-serif italic text-autumn-rust text-base sm:text-xl font-bold">
-                            Driveway Social • Good Food • Autumn Fun
-                        </p>
-                    </div>
-
-                    <!-- Chili Dog Spotlight -->
-                    <div class="bg-gradient-to-r from-amber-100 via-orange-100 to-amber-100 border-2 border-amber-300 rounded-2xl p-5 mb-6 text-center">
-                        <p class="text-xs uppercase font-extrabold text-autumn-rust tracking-wider mb-1">🌭 Main Course Provided By Hosts</p>
-                        <h2 class="font-serif text-2xl sm:text-3xl font-extrabold text-autumn-bark mb-1">Hot Chili Dogs Provided!</h2>
-                        <p class="text-xs sm:text-sm text-stone-700 font-medium max-w-md mx-auto">
-                            Please sign up to bring a <strong>side dish, salad, chips/dip, or dessert</strong> to share with neighbors!
-                        </p>
-                    </div>
-
-                    <!-- Event Logistics -->
-                    <div class="grid grid-cols-2 gap-4 mb-6 text-center">
-                        <div class="bg-white p-4 rounded-2xl border-2 border-amber-200 shadow-sm">
-                            <p class="text-xs font-bold text-autumn-rust uppercase tracking-wider mb-1">📅 Date & Time</p>
-                            <p class="font-serif text-base sm:text-lg font-bold text-stone-900">Friday, Oct 30th</p>
-                            <p class="text-xs text-stone-600 font-bold">At 5:30 PM</p>
-                        </div>
-                        <div class="bg-white p-4 rounded-2xl border-2 border-amber-200 shadow-sm">
-                            <p class="text-xs font-bold text-autumn-rust uppercase tracking-wider mb-1">📍 Driveway Location</p>
-                            <p class="font-serif text-sm sm:text-base font-bold text-stone-900">11449 S Bingham Rim Rd.</p>
-                            <p class="text-xs text-stone-600 font-medium">South Jordan, UT 84009</p>
-                        </div>
-                    </div>
-
-                    <!-- Pumpkin Carving Banner -->
-                    <div class="mb-6 bg-orange-100/80 p-4 rounded-2xl border-2 border-brand-300 text-center flex items-center justify-center space-x-3">
-                        <span class="text-2xl">🎃</span>
-                        <div>
-                            <p class="text-xs font-bold uppercase tracking-wider text-autumn-bark">Pumpkin Carving Activity</p>
-                            <p class="text-xs text-stone-700">Optional but encouraged! Bring a pumpkin and carving tools to carve outside.</p>
-                        </div>
-                        <span class="text-2xl">🎃</span>
-                    </div>
-
-                    <!-- QR Code Sign Up Footer -->
-                    <div class="border-t-2 border-dashed border-amber-400 pt-6 flex flex-col sm:flex-row items-center justify-between gap-6">
-                        <div class="text-center sm:text-left space-y-1">
-                            <h4 class="font-serif font-bold text-lg text-autumn-bark">Scan to Sign Up Your Side Dish!</h4>
-                            <p class="text-xs text-stone-600 max-w-xs">
-                                Point your smartphone camera at the QR code to RSVP and let neighbors know what side dish you're bringing.
-                            </p>
-                            <p class="text-[10px] font-mono text-stone-400 pt-1 break-all max-w-xs" id="qr-url-display"></p>
-                        </div>
-
-                        <!-- QR Image Container -->
-                        <div class="flex flex-col items-center shrink-0">
-                            <div id="qrcode" class="p-3 bg-white border-2 border-autumn-bark rounded-2xl shadow-md"></div>
-                            <span class="text-[10px] font-bold uppercase tracking-wider text-autumn-rust mt-1.5">Scan With Phone</span>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-        </div>
-
-    </main>
-
-    <!-- Footer -->
-    <footer class="no-print mt-auto py-6 border-t border-amber-200/60 bg-amber-50/50 text-center text-xs text-stone-500 z-10">
-        <p>🍂 Neighborhood Autumn Potluck & Pumpkin Carving • South Jordan, UT 🍁</p>
-    </footer>
-
-    <!-- Application Script Logic -->
-    <script>
-        // Sample Initial Data
-        const initialData = [
-            { id: 1, name: "Sarah & Family", contact: "sarah@example.com", guests: 4, carving: "Yes", category: "Side Dishes & Salads", item: "Creamy Potato Salad", timestamp: "2026-10-18T10:30:00Z" },
-            { id: 2, name: "The Miller Family", contact: "555-0142", guests: 3, carving: "Yes", category: "Desserts & Sweets", item: "Warm Apple Crisp & Ice Cream", timestamp: "2026-10-18T11:15:00Z" },
-            { id: 3, name: "Tom Holland", contact: "", guests: 2, carving: "No", category: "Drinks & Apple Cider", item: "2 Gallons Hot Apple Cider", timestamp: "2026-10-18T14:20:00Z" },
-            { id: 4, name: "Rachel Adams", contact: "rachel@example.com", guests: 5, carving: "Yes", category: "Chili Dog Toppings", item: "Shredded Cheddar & Diced Onions", timestamp: "2026-10-19T08:00:00Z" }
-        ];
-
-        let signups = [];
-        let qrCodeInstance = null;
-
-        // Initialize App
-        window.addEventListener('DOMContentLoaded', () => {
-            loadSignups();
-            setupQRCode();
-            createLeaves();
-        });
-
-        // Generate Ambient Falling Autumn Leaves Animation
-        function createLeaves() {
-            const container = document.getElementById('leaves-container');
-            const leafColors = ['#ea580c', '#b45309', '#991b1b', '#d97706'];
-            const numberOfLeaves = 14;
-
-            for (let i = 0; i < numberOfLeaves; i++) {
-                const leaf = document.createElement('div');
-                leaf.className = 'leaf-particle';
-                
-                // SVG Leaf
-                const color = leafColors[Math.floor(Math.random() * leafColors.length)];
-                leaf.innerHTML = `
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="${color}">
-                        <path d="M17 8C8 10 5 16 3 21C8 21 14 18 17 8Z" />
-                        <path d="M12 2C6 5 4 10 3 21C8 19 15 15 12 2Z" opacity="0.7"/>
-                    </svg>
-                `;
-
-                leaf.style.left = `${Math.random() * 100}%`;
-                leaf.style.animationDuration = `${8 + Math.random() * 10}s`;
-                leaf.style.animationDelay = `${Math.random() * 8}s`;
-                leaf.style.transform = `scale(${0.6 + Math.random() * 0.6})`;
-
-                container.appendChild(leaf);
-            }
-        }
-
-        // Load Signups from LocalStorage
-        function loadSignups() {
-            const stored = localStorage.getItem('neighborhood_potluck_signups_v3');
-            if (stored) {
-                try {
-                    signups = JSON.parse(stored);
-                } catch (e) {
-                    signups = [...initialData];
-                }
-            } else {
-                signups = [...initialData];
-                saveSignups();
-            }
-            renderSignups();
-        }
-
-        // Save Signups to LocalStorage
-        function saveSignups() {
-            localStorage.setItem('neighborhood_potluck_signups_v3', JSON.stringify(signups));
-        }
-
-        // Render Dashboard & Signups
-        function renderSignups() {
-            const container = document.getElementById('signups-container');
-            const categoryFilter = document.getElementById('filter-category').value;
-
-            // Stats
-            const totalPeople = signups.reduce((acc, curr) => acc + parseInt(curr.guests || 0), 0);
-            const totalDishes = signups.length;
-            const totalCarving = signups.filter(s => s.carving === 'Yes').length;
-
-            document.getElementById('stat-people').textContent = totalPeople;
-            document.getElementById('stat-dishes').textContent = totalDishes;
-            document.getElementById('stat-carving').textContent = totalCarving;
-
-            // Filter
-            const filteredSignups = categoryFilter === 'ALL' 
-                ? signups 
-                : signups.filter(s => s.category === categoryFilter);
-
-            if (filteredSignups.length === 0) {
-                container.innerHTML = `
-                    <div class="p-8 text-center text-stone-400">
-                        <span class="text-3xl block mb-2">🍂</span>
-                        <p class="font-medium text-stone-600 text-sm">No side dishes listed in this category yet.</p>
-                        <p class="text-xs mt-1">Be the first neighbor to sign up!</p>
-                    </div>
-                `;
-                return;
-            }
-
-            container.innerHTML = filteredSignups.map(entry => `
-                <div class="p-4 sm:p-5 hover:bg-amber-50/50 transition duration-150">
-                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
-                        <div class="flex items-center space-x-3">
-                            <span class="w-8 h-8 rounded-full bg-amber-200 text-autumn-bark font-extrabold text-xs flex items-center justify-center shrink-0 border border-amber-300">
-                                ${escapeHtml(entry.name.charAt(0).toUpperCase())}
-                            </span>
-                            <div>
-                                <h4 class="font-bold text-stone-900 text-sm">${escapeHtml(entry.name)}</h4>
-                                <p class="text-xs text-stone-400">${entry.contact ? escapeHtml(entry.contact) : 'No contact info provided'}</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center space-x-2 text-xs">
-                            <span class="px-2.5 py-1 rounded-full bg-amber-100 text-amber-900 font-bold border border-amber-200">
-                                ${entry.guests} Guest${entry.guests > 1 ? 's' : ''}
-                            </span>
-                            <span class="px-2.5 py-1 rounded-full ${entry.carving === 'Yes' ? 'bg-orange-100 text-orange-900 border border-orange-300' : 'bg-stone-100 text-stone-500'} font-bold">
-                                🎃 ${entry.carving === 'Yes' ? 'Carving Pumpkin' : 'Not Carving'}
-                            </span>
-                        </div>
-                    </div>
-                    <div class="ml-11 bg-stone-50 p-3 rounded-2xl border border-stone-200 flex items-start justify-between gap-3">
-                        <div>
-                            <span class="text-[10px] font-bold uppercase tracking-wider text-autumn-rust block mb-0.5">
-                                ${escapeHtml(entry.category)}
-                            </span>
-                            <p class="text-xs font-semibold text-stone-800">${escapeHtml(entry.item)}</p>
-                        </div>
-                        <button onclick="deleteEntry(${entry.id})" title="Remove entry" class="text-stone-400 hover:text-red-600 transition p-1">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
-                        </button>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        // Form Submit Handler
-        function handleSignupSubmit(e) {
-            e.preventDefault();
-
-            const name = document.getElementById('fullname').value.trim();
-            const contact = document.getElementById('contact').value.trim();
-            const guests = parseInt(document.getElementById('guests').value, 10);
-            const carving = document.getElementById('carving').value;
-            const category = document.getElementById('category').value;
-            const item = document.getElementById('item-details').value.trim();
-
-            if (!name || !category || !item) {
-                showAlert('Please enter your name, dish category, and dish description.', 'error');
-                return;
-            }
-
-            const newEntry = {
-                id: Date.now(),
-                name,
-                contact,
-                guests,
-                carving,
-                category,
-                item,
-                timestamp: new Date().toISOString()
-            };
-
-            signups.unshift(newEntry);
-            saveSignups();
-            renderSignups();
-
-            document.getElementById('signup-form').reset();
-            document.getElementById('guests').value = '2';
-
-            showAlert('🎉 Thank you! Your side dish signup has been saved.', 'success');
-        }
-
-        // Show Alert Banner
-        function showAlert(message, type) {
-            const alertEl = document.getElementById('form-alert');
-            alertEl.classList.remove('hidden', 'bg-green-100', 'text-green-800', 'bg-red-100', 'text-red-800');
-            
-            if (type === 'success') {
-                alertEl.classList.add('bg-green-100', 'text-green-900', 'border', 'border-green-300');
-            } else {
-                alertEl.classList.add('bg-red-100', 'text-red-900', 'border', 'border-red-300');
-            }
-            
-            alertEl.textContent = message;
-
-            setTimeout(() => {
-                alertEl.classList.add('hidden');
-            }, 4000);
-        }
-
-        // Delete Row
-        function deleteEntry(id) {
-            signups = signups.filter(item => item.id !== id);
-            saveSignups();
-            renderSignups();
-        }
-
-        // Reset Demo Data
-        function clearAllData() {
-            signups = [...initialData];
-            saveSignups();
-            renderSignups();
-            showAlert('Sample data restored.', 'success');
-        }
-
-        // Category Selection Autofill Prompt
-        function handleCategoryChange() {
-            const cat = document.getElementById('category').value;
-            const itemInput = document.getElementById('item-details');
-            
-            if (cat === 'Chili Dog Toppings') {
-                itemInput.placeholder = 'e.g., Shredded Cheese, Relish, Diced Onions, Jalapeños';
-            } else if (cat === 'Drinks & Apple Cider') {
-                itemInput.placeholder = 'e.g., Warm Apple Cider, Juice Boxes, Soda';
-            } else if (cat === 'Appetizers & Dips') {
-                itemInput.placeholder = 'e.g., Spinach Dip, Guacamole & Chips, Veggie Tray';
-            } else if (cat === 'Desserts & Sweets') {
-                itemInput.placeholder = 'e.g., Pumpkin Pie, Brownies, Apple Crisp';
-            } else if (cat === 'Chips & Snacks') {
-                itemInput.placeholder = 'e.g., Potato Chips, Pretzels, Popcorn';
-            } else {
-                itemInput.placeholder = 'e.g., Potato Salad, Pasta Salad, Green Salad';
-            }
-        }
-
-        // View Switcher
-        function switchTab(tab) {
-            const signupView = document.getElementById('view-signup');
-            const flyerView = document.getElementById('view-flyer');
-            const tabSignup = document.getElementById('tab-signup');
-            const tabFlyer = document.getElementById('tab-flyer');
-
-            if (tab === 'signup') {
-                signupView.classList.remove('hidden');
-                flyerView.classList.add('hidden');
-
-                tabSignup.className = "px-3.5 py-1.5 text-xs sm:text-sm font-bold rounded-xl transition-all duration-200 bg-brand-600 text-white shadow-md";
-                tabFlyer.className = "px-3.5 py-1.5 text-xs sm:text-sm font-bold rounded-xl transition-all duration-200 text-amber-200 hover:text-white hover:bg-white/10";
-            } else {
-                signupView.classList.add('hidden');
-                flyerView.classList.remove('hidden');
-
-                tabFlyer.className = "px-3.5 py-1.5 text-xs sm:text-sm font-bold rounded-xl transition-all duration-200 bg-brand-600 text-white shadow-md";
-                tabSignup.className = "px-3.5 py-1.5 text-xs sm:text-sm font-bold rounded-xl transition-all duration-200 text-amber-200 hover:text-white hover:bg-white/10";
-            }
-        }
-
-        // QRCode Setup
-        function setupQRCode() {
-            const defaultUrl = 'https://github.com/wbnielson/Neighborhood_Potluck.git';
-            document.getElementById('qr-url-input').value = defaultUrl;
-            document.getElementById('qr-url-display').textContent = defaultUrl;
-
-            const qrContainer = document.getElementById('qrcode');
-            qrContainer.innerHTML = '';
-
-            qrCodeInstance = new QRCode(qrContainer, {
-                text: defaultUrl,
-                width: 128,
-                height: 128,
-                colorDark: "#3f1708",
-                colorLight: "#ffffff",
-                correctLevel: QRCode.CorrectLevel.H
-            });
-        }
-
-        function updateQRCode(newUrl) {
-            if (!newUrl) return;
-            document.getElementById('qr-url-display').textContent = newUrl;
-            if (qrCodeInstance) {
-                qrCodeInstance.clear();
-                qrCodeInstance.makeCode(newUrl);
-            }
-        }
-
-        function resetQRUrl() {
-            const defaultUrl = 'https://github.com/wbnielson/Neighborhood_Potluck.git';
-            document.getElementById('qr-url-input').value = defaultUrl;
-            updateQRCode(defaultUrl);
-        }
-
-        function escapeHtml(str) {
-            return str.replace(/[&<>"']/g, function(m) {
-                return {
-                    '&': '&amp;',
-                    '<': '&lt;',
-                    '>': '&gt;',
-                    '"': '&quot;',
-                    "'": '&#039;'
-                }[m];
-            });
-        }
-    </script>
 </body>
 </html>
